@@ -115,6 +115,7 @@ bool addToClientList(User *currentClient){
         currentClient -> next = NULL;
     }
     return true;
+    
 }
 
 void removeFromClientList(unsigned char clientID[], int acceptFD){
@@ -144,7 +145,7 @@ void removeFromClientList(unsigned char clientID[], int acceptFD){
 
 
 
-bool joinSession(char sessID[], User *currentClient, char * reasonForFailure){ 
+bool joinSession(char sessID[], User *currentClient, char * reasonForFailure){  
     printf("This is %s() from %s, line %d\n",__FUNCTION__, __FILE__, __LINE__);
     printClientStruct(currentClient);
     //1.check if session exists
@@ -176,10 +177,10 @@ bool joinSession(char sessID[], User *currentClient, char * reasonForFailure){
     }
     printf("Done checking condition 2\n");
     if(currentClient->inSess==true){
-        printf("InSess == true!\n");
+           printf("InSess == true!\n");
         char whyFailed[] = "Can't join session: you are already in a session!\n";
         strcpy(reasonForFailure, whyFailed);
-        printf("reason failed: %s\n", reasonForFailure);
+         printf("reason failed: %s\n", reasonForFailure);
         return false; 
     }
 
@@ -204,8 +205,7 @@ bool joinSession(char sessID[], User *currentClient, char * reasonForFailure){
 }
 
 
-//If this is the first session made, join this session
-//else, don't join the session
+
 bool createSession(unsigned char sessID[], User *currentClient){
     printf("This is %s() from %s, line %d\n",__FUNCTION__, __FILE__, __LINE__);
     if(currentClient->loggedIn==false || currentClient->inSess==true ) return false; //User not logged in or already in another sess
